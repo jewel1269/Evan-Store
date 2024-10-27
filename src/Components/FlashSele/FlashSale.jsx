@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { FaHeart, FaEye } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 
 const FlashSale = () => {
   const [timeLeft, setTimeLeft] = useState({
@@ -8,6 +9,13 @@ const FlashSale = () => {
     minutes: 0,
     seconds: 0,
   });
+
+  const navigate = useNavigate();
+
+  const handleDetails =(e)=>{
+    e.preventDefault()
+    navigate("/productDetails")
+  }
 
   // Set the countdown end time here
   const endTime = new Date("2024-12-31T23:59:59").getTime();
@@ -90,7 +98,7 @@ const FlashSale = () => {
               <button className="p-1 rounded-full hover:bg-gray-200">
                 <FaHeart className="h-5 w-5" />
               </button>
-              <button className="p-1 rounded-full hover:bg-gray-200">
+              <button onClick={handleDetails} className="p-1 rounded-full hover:bg-gray-200">
                 <FaEye className="h-5 w-5" />
               </button>
             </div>

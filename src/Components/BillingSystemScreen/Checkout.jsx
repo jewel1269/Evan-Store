@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
 function Checkout() {
   const [items] = useState([
@@ -14,7 +15,7 @@ function Checkout() {
     <div className="max-w-7xl mx-auto p-6">
       <nav className="text-gray-600 text-sm mb-4">
         <span>
-          Account / My Account / Product / View Cart /{" "}
+          <Link to={"/"} className="hover:text-red-600">Home</Link> / <Link to={"/cart"} className="hover:text-red-600">View Cart</Link> /{" "}
           <span className="font-semibold text-gray-800">Checkout</span>
         </span>
       </nav>
@@ -96,7 +97,7 @@ function Checkout() {
 
         {/* Right Section: Order Summary */}
         <div className="w-full lg:w-1/3">
-          <div className="border border-gray-200 rounded-lg p-4">
+          <div className="border border-gray-200 divide-y-2 rounded-lg p-4">
             {items.map((item) => (
               <div
                 key={item.id}
@@ -121,22 +122,7 @@ function Checkout() {
             </div>
 
             <div className="mb-4">
-              <div className="flex items-center mb-2">
-                <input
-                  type="radio"
-                  name="payment"
-                  value="Bank"
-                  checked={selectedPayment === "Bank"}
-                  onChange={() => setSelectedPayment("Bank")}
-                  className="mr-2"
-                />
-                <label>Bank</label>
-                <img
-                  src="/images/payment-icons.png"
-                  alt="Payment methods"
-                  className="w-1/3 ml-2"
-                />
-              </div>
+             
               <div className="flex items-center mb-2">
                 <input
                   type="radio"
@@ -160,7 +146,7 @@ function Checkout() {
                 Apply Coupon
               </button>
             </div>
-            <button className="w-full bg-red-500 text-white py-2 rounded">
+            <button className="w-full hover:bg-green-600 bg-red-500 text-white py-2 rounded">
               Place Order
             </button>
           </div>

@@ -5,6 +5,9 @@ import HomePageContant from "../Components/HomePageContant/HomePageContant";
 import WishlistScreen from "../Components/Wishlist/WishlistScreen";
 import CartScreen from "../Components/CartScreen/CartScreen";
 import BillingSystem from "../Components/BillingSystemScreen/BillingSystem";
+import ProductDetail from "../Components/Details/ProductDetail";
+import Contact from "../Components/Contact/Contact";
+import Profile from "../Components/User/Profile/Profile";
 
 const router = createBrowserRouter([
   {
@@ -31,6 +34,18 @@ const router = createBrowserRouter([
       {
         path: "bilingSystem",
         element: <BillingSystem />, 
+      },
+      {
+        path: "productDetails",
+        element: <ProductDetail />, 
+      },
+      {
+        path: "contact",
+        element: <Contact />, 
+      },
+      {
+        path: "profile",
+        element: <Profile />, 
       },
 
     ],

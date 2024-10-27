@@ -3,7 +3,7 @@ import { FaShoppingCart, FaEye } from "react-icons/fa";
 import { AiFillStar } from "react-icons/ai";
 import Marquee from "react-fast-marquee";
 
-const JustForYou = () => {
+const ReletedItem = () => {
   const items = [
     {
       id: 1,
@@ -43,11 +43,10 @@ const JustForYou = () => {
   ];
 
   return (
-    <div className="lg:p-10 md:p-6 p-2">
+    <div className="  max-w-6xl md:p-6 p-2">
       <div className="flex justify-between items-center mb-6">
         <h2 className="text-2xl font-semibold flex items-center">
-          <span className="inline-block w-2 h-6 bg-red-500 mr-2"></span> Just
-          For You
+          <span className="inline-block w-2 h-6 bg-red-500 mr-2"></span> Releted Item
         </h2>
         <button className="border border-gray-400 px-4 py-2 rounded-md text-gray-700 hover:bg-gray-100">
           See All
@@ -113,4 +112,4 @@ const JustForYou = () => {
   );
 };
 
-export default JustForYou;
+export default ReletedItem;

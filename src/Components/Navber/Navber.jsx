@@ -45,6 +45,18 @@ const Navber = () => {
               </li>
               <li>
                 <NavLink
+                  to="/offer"
+                  className={({ isActive }) =>
+                    isActive
+                      ? "text-red-600 font-semibold underline underline-offset-4 transition-transform transform scale-105 duration-300"
+                      : "hover:text-red-600 hover:scale-105 transition-all duration-300"
+                  }
+                >
+                  Offer
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
                   to="/contact"
                   className={({ isActive }) =>
                     isActive
@@ -53,6 +65,18 @@ const Navber = () => {
                   }
                 >
                   Contact
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to="/about"
+                  className={({ isActive }) =>
+                    isActive
+                      ? "text-red-600 font-semibold underline underline-offset-4 transition-transform transform scale-105 duration-300"
+                      : "hover:text-red-600 hover:scale-105 transition-all duration-300"
+                  }
+                >
+                  About
                 </NavLink>
               </li>
             </ul>
@@ -87,12 +111,12 @@ const Navber = () => {
             </label>
             <ul
               tabIndex={0}
-              className="menu menu-sm dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
+              className="menu menu-sm z-[100] dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
             >
               <li>
-                <a className="justify-between">
+                <NavLink to={"/profile"} className="justify-between">
                   Profile <span className="badge">New</span>
-                </a>
+                </NavLink>
               </li>
               <li>
                 <a>Settings</a>
@@ -128,8 +152,8 @@ const Navber = () => {
       {/* Drawer for Mobile Navigation */}
       <div className="drawer  lg:hidden">
         <input id="mobile-drawer" type="checkbox" className="drawer-toggle" />
-        <div className="drawer-content"></div>
-        <div className="drawer-side mt-16">
+        <div className="drawer-content "></div>
+        <div className="drawer-side mt-16 z-[100]">
           <label htmlFor="mobile-drawer" className="drawer-overlay"></label>
           <ul className="menu h-screen p-4 w-64 bg-base-100 text-base-content">
             <li>
