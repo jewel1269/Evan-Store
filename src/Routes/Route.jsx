@@ -4,6 +4,7 @@ import Shop from "../Components/ShopPage/Shop";
 import HomePageContant from "../Components/HomePageContant/HomePageContant";
 import WishlistScreen from "../Components/Wishlist/WishlistScreen";
 import CartScreen from "../Components/CartScreen/CartScreen";
+import BillingSystem from "../Components/BillingSystemScreen/BillingSystem";
 
 const router = createBrowserRouter([
   {
@@ -26,6 +27,10 @@ const router = createBrowserRouter([
       {
         path: "cart",
         element: <CartScreen />, 
+      },
+      {
+        path: "bilingSystem",
+        element: <BillingSystem />, 
       },
 
     ],
