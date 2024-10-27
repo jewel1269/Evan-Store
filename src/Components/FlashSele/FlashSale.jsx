@@ -75,7 +75,7 @@ const FlashSale = () => {
       {/* Product List */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
         {/* Product Card */}
-        {[...Array(5)].map((_, index) => (
+        {[...Array(7)].map((_, index) => (
           <div
             key={index}
             className="border rounded-lg lg:p-4 relative hover:shadow-lg transition"

@@ -9,10 +9,10 @@ const Navber = () => {
       <div className="flex justify-between items-center w-full">
         {/* Logo */}
         <div className="flex-none">
-          <a className="btn btn-ghost normal-case text-lg lg:text-2xl">
+          <NavLink to={"/"} className="btn btn-ghost normal-case text-lg lg:text-2xl">
             <span className="text-red-600 -mr-2">𝔼</span>𝕧𝕒𝕟
             <span className="text-yellow-800 -mr-2">𝕊</span>𝕥𝕠𝕣𝕖
-          </a>
+          </NavLink>
         </div>
 
         {/* Search Bar and Navbar Links */}
@@ -71,10 +71,10 @@ const Navber = () => {
         {/* Profile, Wishlist, and Cart Icons */}
         <div className="flex items-center space-x-4">
           <div className="flex items-center gap-3">
-            <FaRegHeart style={{ height: "20px", width: "20px" }} />
-            <BsFillCartPlusFill style={{ height: "20px", width: "20px" }} />
+           <NavLink to={"/wishlist"} className="hover:text-red-600 flex"> <FaRegHeart style={{ height: "20px", width: "20px" }}/><span className="relative -mt-3 text-red-600 font-bold">4</span></NavLink>
+           <NavLink to={'/cart'} className="hover:text-red-600 flex"> <BsFillCartPlusFill style={{ height: "20px", width: "20px" }} /> <span className="relative -mt-3 text-red-600 font-bold">7</span></NavLink>
           </div>
-
+          
           {/* Profile Dropdown (for larger screens) */}
           <div className="dropdown dropdown-end hidden w-full md:block lg:block">
             <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
