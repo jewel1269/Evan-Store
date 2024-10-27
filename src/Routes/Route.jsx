@@ -8,6 +8,7 @@ import BillingSystem from "../Components/BillingSystemScreen/BillingSystem";
 import ProductDetail from "../Components/Details/ProductDetail";
 import Contact from "../Components/Contact/Contact";
 import Profile from "../Components/User/Profile/Profile";
+import Sidebar from "../Components/User/Sidebar/Sidebar";
 
 const router = createBrowserRouter([
   {
@@ -44,10 +45,15 @@ const router = createBrowserRouter([
         element: <Contact />, 
       },
       {
-        path: "profile",
-        element: <Profile />, 
+        path: "sidebar",
+        element: <Sidebar />, 
+        children: [
+          {
+            path: "profile",
+            element: <Profile />,
+          },
+        ],
       },
-
     ],
   },
 ]);
