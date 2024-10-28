@@ -81,7 +81,7 @@ const FlashSale = () => {
       </div>
 
       {/* Product List */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6 mb-6">
         {/* Product Card */}
         {[...Array(7)].map((_, index) => (
           <div
@@ -104,11 +104,11 @@ const FlashSale = () => {
             </div>
 
             {/* Product Image */}
-            <div>
+            <div className="flex justify-center">
               <img
                 src="https://media.4rgos.it/i/Argos/0621-m0014-m007-m050-asym-m008-m022-gamingconsoleguide-8349103?w=auto&qlt=50&fmt=auto&noiser=0&fmt.jpeg.interlaced=true&fmt.jp2.qlt=40&"
                 alt="Product"
-                className="w-full h-48  rounded-lg mb-4"
+                className="w-60 h-48  rounded-lg mb-4"
               />
             </div>
 

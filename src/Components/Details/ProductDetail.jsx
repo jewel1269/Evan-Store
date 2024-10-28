@@ -20,6 +20,7 @@ function ProductDetail() {
   };
 
   return (
+  
     <div className="max-w-7xl mx-auto p-6">
       <nav className="text-gray-600 text-sm mb-4">
         <span>
@@ -166,11 +167,11 @@ function ProductDetail() {
           </div>
         </div>
       </div>
-
+     
       <div>
         <ReletedItem/>
       </div>
-    </div>
+      </div>
     
   );
 }

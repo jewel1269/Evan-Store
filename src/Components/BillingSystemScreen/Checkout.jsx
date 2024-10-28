@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function Checkout() {
   const [items] = useState([
@@ -7,6 +7,11 @@ function Checkout() {
     { id: 2, name: "H1 Gamepad", price: 1100 },
   ]);
   const [selectedPayment, setSelectedPayment] = useState("Cash on delivery");
+  const navigate = useNavigate()
+
+  const handleInvoice =()=>{
+    navigate("/invoice")
+  }
 
   const calculateSubtotal = () =>
     items.reduce((sum, item) => sum + item.price, 0);
@@ -146,7 +151,7 @@ function Checkout() {
                 Apply Coupon
               </button>
             </div>
-            <button className="w-full hover:bg-green-600 bg-red-500 text-white py-2 rounded">
+            <button onClick={handleInvoice} className="w-full hover:bg-green-600 bg-red-500 text-white py-2 rounded">
               Place Order
             </button>
           </div>

@@ -100,8 +100,8 @@ const Navber = () => {
           </div>
           
           {/* Profile Dropdown (for larger screens) */}
-          <div className="dropdown dropdown-end hidden w-full md:block lg:block">
-            <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
+          <div className="dropdown dropdown-end z-[100] hidden w-full md:block lg:block">
+            <label tabIndex={0} className="btn  btn-ghost btn-circle avatar">
               <div className="w-10 rounded-full">
                 <img
                   alt="User avatar"

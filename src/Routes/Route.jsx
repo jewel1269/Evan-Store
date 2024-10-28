@@ -9,6 +9,7 @@ import ProductDetail from "../Components/Details/ProductDetail";
 import Contact from "../Components/Contact/Contact";
 import Profile from "../Components/User/Profile/Profile";
 import Sidebar from "../Components/User/Sidebar/Sidebar";
+import InvoiceGenerator from "../Components/InvoiceGenerator/InvoiceGenerator";
 
 const router = createBrowserRouter([
   {
@@ -43,6 +44,10 @@ const router = createBrowserRouter([
       {
         path: "contact",
         element: <Contact />, 
+      },
+      {
+        path: "invoice",
+        element: <InvoiceGenerator />, 
       },
       {
         path: "sidebar",

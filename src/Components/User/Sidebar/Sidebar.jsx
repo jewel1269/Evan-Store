@@ -22,12 +22,12 @@ const Sidebar = () => {
           </li>
           <li>
             <Link
-              to="/address-book"
+              to="/orders"
               className={`block p-2 rounded-lg ${
-                location.pathname === '/address-book' ? 'text-red-500 font-semibold' : 'text-gray-600'
+                location.pathname === '/Orders' ? 'text-red-500 font-semibold' : 'text-gray-600'
               }`}
             >
-              Address Book
+              My Orders
             </Link>
           </li>
           <li>

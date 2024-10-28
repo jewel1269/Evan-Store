@@ -28,12 +28,6 @@ const HeroWithBanner = () => {
           <FaHome className="mr-2" /> Home & Lifestyle
         </li>
         <li className="flex items-center cursor-pointer hover:text-gray-700">
-          <FaCapsules className="mr-2" /> Medicine
-        </li>
-        <li className="flex items-center cursor-pointer hover:text-gray-700">
-          <FaBicycle className="mr-2" /> Sports & Outdoor
-        </li>
-        <li className="flex items-center cursor-pointer hover:text-gray-700">
           <FaBaby className="mr-2" /> Baby's & Toys
         </li>
         <li className="flex items-center cursor-pointer hover:text-gray-700">
