@@ -119,7 +119,7 @@ const Navber = () => {
                 </NavLink>
               </li>
               <li>
-                <a>Settings</a>
+                <NavLink to={"/sidebar"}>Settings</NavLink>
               </li>
               <li>
                 <a>Logout</a>

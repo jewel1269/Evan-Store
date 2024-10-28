@@ -10,6 +10,7 @@ import Contact from "../Components/Contact/Contact";
 import Profile from "../Components/User/Profile/Profile";
 import Sidebar from "../Components/User/Sidebar/Sidebar";
 import InvoiceGenerator from "../Components/InvoiceGenerator/InvoiceGenerator";
+import OrderList from "../Components/OrderListTable/OrderListTable";
 
 const router = createBrowserRouter([
   {
@@ -56,6 +57,10 @@ const router = createBrowserRouter([
           {
             path: "profile",
             element: <Profile />,
+          },
+          {
+            path: "orderList",
+            element: <OrderList/>,
           },
         ],
       },
