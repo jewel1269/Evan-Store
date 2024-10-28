@@ -1,3 +1,4 @@
+import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { FaHeart, FaEye } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
@@ -10,12 +11,14 @@ const FlashSale = () => {
     seconds: 0,
   });
 
+  const [flashSales, setFlashSales] = useState([]);
+
   const navigate = useNavigate();
 
-  const handleDetails =(e)=>{
-    e.preventDefault()
-    navigate("/productDetails")
-  }
+  const handleDetails = (e) => {
+    e.preventDefault();
+    navigate("/productDetails");
+  };
 
   // Set the countdown end time here
   const endTime = new Date("2024-12-31T23:59:59").getTime();
@@ -40,6 +43,27 @@ const FlashSale = () => {
 
     return () => clearInterval(interval);
   }, [endTime]);
+
+  //fsetch data
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        // Use the correct API endpoint
+        const response = await axios.get(
+          `http://localhost:5000/product/Api/byGetProduct`
+        );
+        setFlashSales(response.data);
+      } catch (error) {
+        console.error("Error fetching products:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchProducts();
+  }, []);
+
+  console.log(flashSales);
 
   return (
     <div className="lg:p-6 bg-white rounded-lg">
@@ -83,14 +107,14 @@ const FlashSale = () => {
       {/* Product List */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6 mb-6">
         {/* Product Card */}
-        {[...Array(7)].map((_, index) => (
+        {flashSales.slice(0, 12).map((item, index) => (
           <div
             key={index}
             className="border rounded-lg lg:p-4 relative hover:shadow-lg transition"
           >
             {/* Discount Badge */}
             <div className="absolute top-2 lg:left-2 bg-red-500 text-white text-xs font-semibold px-2 py-1 rounded">
-              -{index * 5 + 20}%
+              {item.discount}%
             </div>
 
             {/* Action Buttons */}
@@ -98,7 +122,10 @@ const FlashSale = () => {
               <button className="p-1 rounded-full hover:bg-gray-200">
                 <FaHeart className="h-5 w-5" />
               </button>
-              <button onClick={handleDetails} className="p-1 rounded-full hover:bg-gray-200">
+              <button
+                onClick={handleDetails}
+                className="p-1 rounded-full hover:bg-gray-200"
+              >
                 <FaEye className="h-5 w-5" />
               </button>
             </div>
@@ -106,31 +133,44 @@ const FlashSale = () => {
             {/* Product Image */}
             <div className="flex justify-center">
               <img
-                src="https://media.4rgos.it/i/Argos/0621-m0014-m007-m050-asym-m008-m022-gamingconsoleguide-8349103?w=auto&qlt=50&fmt=auto&noiser=0&fmt.jpeg.interlaced=true&fmt.jp2.qlt=40&"
+                src={item.image.map((pic)=>pic)}
                 alt="Product"
                 className="w-60 h-48  rounded-lg mb-4"
               />
             </div>
 
             {/* Product Info */}
-            <h3 className="text-sm font-semibold">Product Name</h3>
+            <h3 className="text-sm font-semibold">{item.productName}</h3>
             <div className="flex items-center space-x-2 mt-2">
-              <span className="text-red-500 font-bold text-lg">$120</span>
-              <span className="text-gray-400 line-through">$160</span>
+              <span className="text-red-500 font-bold text-lg">
+                Tk {item.price.new}
+              </span>
+              <span className="text-gray-400 line-through">
+                Tk {item.price.old}
+              </span>
             </div>
 
             {/* Rating */}
             <div className="flex items-center space-x-1 text-yellow-500 text-sm mt-1">
-              {[...Array(5)].map((_, i) => (
-                <span key={i}>★</span>
+              {Array.from({ length: Math.floor(item.rating) }, (_, index) => (
+                <span key={index}>★</span> // Full star for each whole number
               ))}
-              <span className="text-gray-400">(88)</span>
+              {item.rating % 1 !== 0 && <span>☆</span>}{" "}
+              {/* Optional half star if rating is a decimal */}
+              <span className="text-gray-400">({item.review} reviews)</span>
             </div>
 
             {/* Add to Cart Button */}
-            {index % 2 === 0 && (
+            {item.instock === true ? (
               <button className="w-full mt-4 bg-black text-white py-1 rounded hover:bg-gray-800">
                 Add To Cart
+              </button>
+            ) : (
+              <button
+                className="w-full mt-4 bg-gray-300 text-gray-600 py-1 rounded cursor-not-allowed"
+                disabled
+              >
+                Out of Stock
               </button>
             )}
           </div>
