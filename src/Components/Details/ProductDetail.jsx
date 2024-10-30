@@ -4,6 +4,9 @@ import { CiDeliveryTruck } from "react-icons/ci";
 import { GiReturnArrow } from "react-icons/gi";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import ReletedItem from "./ReletedItem";
+import { useDispatch } from "react-redux";
+import { addToCart } from "../../Redux/features/product";
+import toast from "react-hot-toast";
 
 function ProductDetail() {
   const [quantity, setQuantity] = useState(1);
@@ -14,6 +17,7 @@ function ProductDetail() {
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
   const { id } = useParams();
+  const dispatch = useDispatch();
 
   // Fetch product data with id
   useEffect(() => {
@@ -42,6 +46,15 @@ function ProductDetail() {
   const handleQuantityChange = (increment) => {
     setQuantity((prev) => Math.max(1, prev + increment));
   };
+
+
+
+  //add to cart
+  const AddToCart = (product) => {
+    dispatch(addToCart(product));
+    toast.success(`${product.productName} added successfully!`);
+  };
+
 
   if (loading) {
     return <p>Loading...</p>;
@@ -170,6 +183,12 @@ function ProductDetail() {
             >
               Buy Now
             </button>
+            <button
+              onClick={()=>AddToCart(product)}
+              className="ml-4 bg-green-500 hover:bg-green-700 text-white px-6 py-2 rounded"
+            >
+              Add to Cart
+            </button>
           </div>
 
           <div className="border border-gray-200 rounded-lg p-4 space-y-2">
@@ -206,7 +225,7 @@ function ProductDetail() {
       </div>
 
       <div>
-        <ReletedItem />
+        <ReletedItem category={product.category} />
       </div>
     </div>
   );

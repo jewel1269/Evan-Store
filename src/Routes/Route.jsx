@@ -35,7 +35,7 @@ const router = createBrowserRouter([
         element: <CartScreen />, 
       },
       {
-        path: "billingSystem",
+        path: "bilingSystem",
         element: <BillingSystem />, 
       },
       {
@@ -50,6 +50,37 @@ const router = createBrowserRouter([
         path: "invoice",
         element: <InvoiceGenerator />, 
       },
+
+      //this is Category Rotes
+      {
+        path: "shop/WomansFashion",
+        element: <Shop />, 
+      },
+      {
+        path: "shop/MensFashion",
+        element: <Shop />, 
+      },
+      {
+        path: "shop/Electronics",
+        element: <Shop />, 
+      },
+      {
+        path: "/shop/HomeLifestyle",
+        element: <Shop />, 
+      },
+      {
+        path: "shop/BabysToys",
+        element: <Shop />, 
+      },
+      {
+        path: "shop/HealthBeauty",
+        element: <Shop />, 
+      },
+      {
+        path: "shop/WomansFashion",
+        element: <Shop />, 
+      },
+  
       {
         path: "sidebar",
         element: <Sidebar />, 

@@ -8,34 +8,32 @@ import 'swiper/css/pagination';
 
 import { Pagination } from 'swiper/modules';
 import { FaTshirt, FaLaptop, FaHome, FaCapsules, FaBicycle, FaBaby, FaAppleAlt, FaHeartbeat, FaMale } from 'react-icons/fa';
+import { NavLink } from 'react-router-dom';
 
 const HeroWithBanner = () => {
   return (
-    <div className="flex flex-col md:flex-row rounded-xl">
+    <div className="flex flex-col lg:h-80 md:flex-row rounded-xl">
       {/* Sidebar for larger screens */}
       <div className="hidden md:block w-1/4 bg-slate-50 p-4 rounded-xl">
       <ul className="space-y-4">
-        <li className="flex items-center cursor-pointer hover:text-gray-700">
+        <NavLink to={'/shop/WomansFashion'} className="flex items-center  cursor-pointer hover:underline hover:text-red-600 ">
           <FaTshirt className="mr-2" /> Woman's Fashion
-        </li>
-        <li className="flex items-center cursor-pointer hover:text-gray-700">
+        </NavLink>
+        <NavLink to={"/shop/MensFashion"} className="flex items-center cursor-pointer hover:underline hover:text-red-600 ">
           <FaMale className="mr-2" /> Men's Fashion
-        </li>
-        <li className="flex items-center cursor-pointer hover:text-gray-700">
+        </NavLink>
+        <NavLink to={"/shop/Electronics"} className="flex items-center cursor-pointer hover:underline hover:text-red-600 ">
           <FaLaptop className="mr-2" /> Electronics
-        </li>
-        <li className="flex items-center cursor-pointer hover:text-gray-700">
+        </NavLink>
+        <NavLink to={"/shop/HomeLifestyle"} className="flex items-center cursor-pointer hover:underline hover:text-red-600 ">
           <FaHome className="mr-2" /> Home & Lifestyle
-        </li>
-        <li className="flex items-center cursor-pointer hover:text-gray-700">
+        </NavLink>
+        <NavLink to={"/shop/BabysToys"} className="flex items-center cursor-pointer hover:underline hover:text-red-600 ">
           <FaBaby className="mr-2" /> Baby's & Toys
-        </li>
-        <li className="flex items-center cursor-pointer hover:text-gray-700">
-          <FaAppleAlt className="mr-2" /> Groceries & Pets
-        </li>
-        <li className="flex items-center cursor-pointer hover:text-gray-700">
+        </NavLink>
+        <NavLink to={"/shop/HealthBeauty"} className="flex items-center cursor-pointer hover:underline hover:text-red-600 ">
           <FaHeartbeat className="mr-2" /> Health & Beauty
-        </li>
+        </NavLink>
       </ul>
       </div>
 

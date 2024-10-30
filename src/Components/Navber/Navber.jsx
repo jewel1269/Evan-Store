@@ -1,9 +1,12 @@
 import React from "react";
 import { BsFillCartPlusFill } from "react-icons/bs";
 import { FaRegHeart } from "react-icons/fa";
+import { useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 
 const Navber = () => {
+  const wishlist = useSelector((state) => state.product.wishlist);
+  const products = useSelector((state) => state.product.products);
   return (
     <div className="navbar  bg-base-100 rounded-xl shadow-sm px-4 lg:px-16">
       <div className="flex justify-between items-center w-full">
@@ -95,8 +98,8 @@ const Navber = () => {
         {/* Profile, Wishlist, and Cart Icons */}
         <div className="flex items-center space-x-4">
           <div className="flex items-center gap-3">
-           <NavLink to={"/wishlist"} className="hover:text-red-600 flex"> <FaRegHeart style={{ height: "20px", width: "20px" }}/><span className="relative -mt-3 text-red-600 font-bold">4</span></NavLink>
-           <NavLink to={'/cart'} className="hover:text-red-600 flex"> <BsFillCartPlusFill style={{ height: "20px", width: "20px" }} /> <span className="relative -mt-3 text-red-600 font-bold">7</span></NavLink>
+           <NavLink to={"/wishlist"} className="hover:text-red-600 flex"> <FaRegHeart style={{ height: "20px", width: "20px" }}/><span className="relative -mt-3 text-red-600 font-bold">{wishlist.length}</span></NavLink>
+           <NavLink to={'/cart'} className="hover:text-red-600 flex"> <BsFillCartPlusFill style={{ height: "20px", width: "20px" }} /> <span className="relative -mt-3 text-red-600 font-bold">{products.length}</span></NavLink>
           </div>
           
           {/* Profile Dropdown (for larger screens) */}

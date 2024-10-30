@@ -39,9 +39,11 @@ const BestSellingProducts = () => {
 
       <div className="flex justify-between items-center mb-6">
         <h2 className="text-3xl font-bold">Best Selling Products</h2>
-        <button className="bg-red-500 text-white px-6 py-2 rounded-lg font-semibold hover:bg-red-600">
+        <NavLink to={"/shop"}>
+        <button className="bg-red-500 text-white px-6 py-2 rounded-3xl font-semibold hover:bg-red-600">
           View All
         </button>
+        </NavLink>
       </div>
 
       {/* Marquee Slider */}

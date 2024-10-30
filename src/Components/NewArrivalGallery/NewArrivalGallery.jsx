@@ -39,7 +39,7 @@ const NewArrivalGallery = () => {
   return (
     <div className="px-8 py-16 ">
       <h2 className="text-red-500 font-semibold mb-2">Featured</h2>
-      <h1 className="text-3xl font-bold mb-8"><span className="inline-block w-2 h-6 bg-red-500 mr-2"></span> New Arrival</h1>
+      <h1 className="text-3xl font-bold mb-8"><span className="inline-block w-2 h-6 bg-red-500 mr-2"></span>Special Products </h1>
 
       <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         {products.map((product) => (
