@@ -1,75 +1,33 @@
-import React from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 import Marquee from "react-fast-marquee";
 import { FaHeart, FaEye } from "react-icons/fa";
+import { NavLink } from "react-router-dom"; // Import NavLink
 
 const BestSellingProducts = () => {
-  const products = [
-    {
-      name: "The north coat",
-      price: "$260",
-      originalPrice: "$360",
-      image:
-        "https://media.istockphoto.com/id/918392268/photo/blue-tartan-shirt-folded-on-white-background.jpg?s=612x612&w=is&k=20&c=-dB1lg98AxgSmYGDUZc7NpuPMJ9B13fUTOrOU7naXSA=",
-      rating: 4.5,
-      reviews: 65,
-    },
-    {
-      name: "Gucci duffle bag",
-      price: "$960",
-      originalPrice: "$1160",
-      image: "https://example.com/gucci-bag.jpg",
-      rating: 5,
-      reviews: 65,
-    },
-    {
-      name: "RGB liquid CPU Cooler",
-      price: "$160",
-      originalPrice: "$170",
-      image: "https://example.com/cpu-cooler.jpg",
-      rating: 4.5,
-      reviews: 65,
-    },
-    {
-      name: "Small BookShelf",
-      price: "$360",
-      originalPrice: "",
-      image: "https://example.com/bookshelf.jpg",
-      rating: 5,
-      reviews: 65,
-    },
-    {
-      name: "RGB liquid CPU Cooler",
-      price: "$160",
-      originalPrice: "$170",
-      image: "https://example.com/cpu-cooler.jpg",
-      rating: 4.5,
-      reviews: 65,
-    },
-    {
-      name: "Small BookShelf",
-      price: "$360",
-      originalPrice: "",
-      image: "https://example.com/bookshelf.jpg",
-      rating: 5,
-      reviews: 65,
-    },
-    {
-      name: "RGB liquid CPU Cooler",
-      price: "$160",
-      originalPrice: "$170",
-      image: "https://example.com/cpu-cooler.jpg",
-      rating: 4.5,
-      reviews: 65,
-    },
-    {
-      name: "Small BookShelf",
-      price: "$360",
-      originalPrice: "",
-      image: "https://example.com/bookshelf.jpg",
-      rating: 5,
-      reviews: 65,
-    },
-  ];
+  const [products, setProducts] = useState([]); // Initialize as an array
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const response = await axios.get(
+          `http://localhost:5000/product/Api/GetProduct?bestSale=true`
+        );
+        setProducts(response.data);
+      } catch (error) {
+        console.error("Error fetching products:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchProducts();
+  }, []);
+
+  if (loading) {
+    return <div>Loading...</div>; // Display loading state
+  }
 
   return (
     <div className="p-6 bg-white rounded-lg lg:mt-0 md:mt-8">
@@ -105,23 +63,30 @@ const BestSellingProducts = () => {
               </div>
 
               {/* Product Image */}
-              <div className="flex justify-center items-center">
-                <img
-                  src={product.image}
-                  alt={product.name}
-                  className="w-56 h-60 object-cover rounded-lg"
-                />
-              </div>
+              <NavLink to={`/productDetails/${product._id}`}>
+                <div className="flex justify-center mb-4">
+                  <img
+                    src={`http://localhost:5000/${product.image[0].replace(
+                      /\\/g,
+                      "/"
+                    )}`} // Display only the first image
+                    alt="Product"
+                    className="w-60 h-48 rounded-lg"
+                  />
+                </div>
+              </NavLink>
 
               {/* Product Info */}
-              <h3 className="text-sm font-semibold mb-1">{product.name}</h3>
+              <h3 className="text-sm font-semibold mb-1">
+                {product.productName}
+              </h3>
               <div className="flex items-center space-x-2">
                 <span className="text-red-500 font-bold text-lg">
-                  {product.price}
+                  Tk {product.price.new}
                 </span>
-                {product.originalPrice && (
+                {product.price.old && (
                   <span className="text-gray-400 line-through">
-                    {product.originalPrice}
+                    Tk {product.price.old}
                   </span>
                 )}
               </div>

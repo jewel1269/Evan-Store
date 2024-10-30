@@ -35,11 +35,11 @@ const router = createBrowserRouter([
         element: <CartScreen />, 
       },
       {
-        path: "bilingSystem",
+        path: "billingSystem",
         element: <BillingSystem />, 
       },
       {
-        path: "productDetails",
+        path: "productDetails/:id",
         element: <ProductDetail />, 
       },
       {

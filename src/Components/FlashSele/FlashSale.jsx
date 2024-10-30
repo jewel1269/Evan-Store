@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { FaHeart, FaEye } from "react-icons/fa";
-import { useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 
 const FlashSale = () => {
   const [timeLeft, setTimeLeft] = useState({
@@ -15,13 +15,10 @@ const FlashSale = () => {
 
   const navigate = useNavigate();
 
-  const handleDetails = (e) => {
-    e.preventDefault();
-    navigate("/productDetails");
-  };
+
 
   // Set the countdown end time here
-  const endTime = new Date("2024-12-31T23:59:59").getTime();
+  const endTime = new Date("2024-10-31T23:59:59").getTime();
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -63,7 +60,7 @@ const FlashSale = () => {
     fetchProducts();
   }, []);
 
-  console.log(flashSales);
+
 
   return (
     <div className="lg:p-6 bg-white rounded-lg">
@@ -107,7 +104,7 @@ const FlashSale = () => {
       {/* Product List */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6 mb-6">
         {/* Product Card */}
-        {flashSales.slice(0, 12).map((item, index) => (
+        {flashSales.map((item, index) => (
           <div
             key={index}
             className="border rounded-lg lg:p-4 relative hover:shadow-lg transition"
@@ -123,21 +120,26 @@ const FlashSale = () => {
                 <FaHeart className="h-5 w-5" />
               </button>
               <button
-                onClick={handleDetails}
+                
                 className="p-1 rounded-full hover:bg-gray-200"
               >
                 <FaEye className="h-5 w-5" />
               </button>
             </div>
 
-            {/* Product Image */}
-            <div className="flex justify-center">
+         <NavLink to={`/productDetails/${item?._id}`}>
+             {/* Product Image */}
+             <div className="flex justify-center mb-4">
               <img
-                src={item.image.map((pic)=>pic)}
+                src={`http://localhost:5000/${item.image[0].replace(
+                  /\\/g,
+                  "/"
+                )}`} // Display only the first image
                 alt="Product"
-                className="w-60 h-48  rounded-lg mb-4"
+                className="w-60 h-48 rounded-lg"
               />
             </div>
+         </NavLink>
 
             {/* Product Info */}
             <h3 className="text-sm font-semibold">{item.productName}</h3>

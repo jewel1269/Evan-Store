@@ -43,7 +43,7 @@ const ReletedItem = () => {
   ];
 
   return (
-    <div className="  max-w-6xl md:p-6 p-2">
+    <div className="  max-w-8xl md:p-6 p-2">
       <div className="flex justify-between items-center mb-6">
         <h2 className="text-2xl font-semibold flex items-center">
           <span className="inline-block w-2 h-6 bg-red-500 mr-2"></span> Releted Item
