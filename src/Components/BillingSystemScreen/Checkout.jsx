@@ -1,19 +1,76 @@
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
+import toast from "react-hot-toast";
+import { removeToAllCart } from "../../Redux/features/product";
 
 function Checkout() {
   const items = useSelector((state) => state.product.products);
-
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState(""); 
+  const [address, setAddress] = useState("");
+  const [apartment, setApartment] = useState("");
+  const [city, setCity] = useState("");
+  const [phone, setPhone] = useState("");
+  const [email, setEmail] = useState("");
   const [selectedPayment, setSelectedPayment] = useState("Cash on delivery");
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
-
-  const handleInvoice = () => {
-    navigate("/invoice");
-  };
+  const dispatch = useDispatch()
 
   const calculateSubtotal = () =>
-    items.reduce((sum, item) => sum  + item.price.new, 0);
+    items.reduce((sum, item) => sum + item.price.new * item.quantity, 0);
+ 
+  const removeItem = (items) => {
+    dispatch(removeToAllCart(items));
+  };
+
+  const handleInvoice = async (e) => {
+    e.preventDefault();
+    setIsLoading(true);
+
+    // Validate required fields
+    if (!firstName || !lastName || !address || !city || !phone || !email) {
+      toast.error("Please fill in all required fields.");
+      setIsLoading(false);
+      return;
+    }
+
+    const orderData = {
+      billingDetails: {
+        firstName,
+        lastName,
+        address,
+        apartment,
+        city,
+        phone,
+        email,
+      },
+      items: items.map((item) => ({
+        productId: item._id,
+        productName: item.productName,
+        price: item.price.new,
+        quantity: item.quantity,
+      })),
+      paymentMethod: selectedPayment,
+      subtotal: calculateSubtotal(),
+      shipping: 100,
+      total: calculateSubtotal() + 100,
+    };
+
+    try {
+      await axios.post("http://localhost:5000/api/orders", orderData);
+      toast.success("Order Successfully Complete");
+      navigate("/thankyou");
+      removeItem(items)
+    } catch (error) {
+      console.error("Order submission failed", error);
+      toast.error("Order submission failed");
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   return (
     <div className="max-w-7xl mx-auto p-6">
@@ -34,21 +91,29 @@ function Checkout() {
         {/* Left Section: Billing Details */}
         <div className="w-full lg:w-2/3">
           <h2 className="text-2xl font-semibold mb-6">Billing Details</h2>
-          <form className="space-y-4">
+          <form className="space-y-4" onSubmit={handleInvoice}>
             <div>
               <label className="block text-gray-600">
                 First Name<span className="text-red-500">*</span>
               </label>
               <input
                 type="text"
+                value={firstName}
+                onChange={(e) => setFirstName(e.target.value)}
                 className="w-full border border-gray-300 rounded p-2"
+                required
               />
             </div>
             <div>
-              <label className="block text-gray-600">Company Name</label>
+              <label className="block text-gray-600">
+                Last Name<span className="text-red-500">*</span>
+              </label>
               <input
                 type="text"
+                value={lastName} // Changed to lastName
+                onChange={(e) => setLastName(e.target.value)}
                 className="w-full border border-gray-300 rounded p-2"
+                required
               />
             </div>
             <div>
@@ -57,7 +122,10 @@ function Checkout() {
               </label>
               <input
                 type="text"
+                value={address}
+                onChange={(e) => setAddress(e.target.value)}
                 className="w-full border border-gray-300 rounded p-2"
+                required
               />
             </div>
             <div>
@@ -66,6 +134,8 @@ function Checkout() {
               </label>
               <input
                 type="text"
+                value={apartment}
+                onChange={(e) => setApartment(e.target.value)}
                 className="w-full border border-gray-300 rounded p-2"
               />
             </div>
@@ -75,7 +145,10 @@ function Checkout() {
               </label>
               <input
                 type="text"
+                value={city}
+                onChange={(e) => setCity(e.target.value)}
                 className="w-full border border-gray-300 rounded p-2"
+                required
               />
             </div>
             <div>
@@ -83,8 +156,11 @@ function Checkout() {
                 Phone Number<span className="text-red-500">*</span>
               </label>
               <input
-                type="text"
+                type="tel" // Changed to type="tel"
+                value={phone}
+                onChange={(e) => setPhone(e.target.value)}
                 className="w-full border border-gray-300 rounded p-2"
+                required
               />
             </div>
             <div>
@@ -93,15 +169,20 @@ function Checkout() {
               </label>
               <input
                 type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 className="w-full border border-gray-300 rounded p-2"
+                required
               />
             </div>
-            <div className="flex items-center mt-4">
-              <input type="checkbox" className="mr-2" />
-              <label className="text-gray-600">
-                Save this information for faster check-out next time
-              </label>
-            </div>
+
+            <button
+              type="submit"
+              className="w-full hover:bg-green-600 bg-red-500 text-white py-2 rounded"
+              disabled={isLoading}
+            >
+              {isLoading ? "Placing Order..." : "Place Order"}
+            </button>
           </form>
         </div>
 
@@ -114,7 +195,7 @@ function Checkout() {
                 className="flex justify-between items-center mb-2"
               >
                 <span>{item.productName}</span>
-                <span>Tk {item.price.new}</span>
+                <span>Tk {item.price.new * item.quantity}</span>
               </div>
             ))}
             <hr className="my-2" />
@@ -128,7 +209,7 @@ function Checkout() {
             </div>
             <div className="flex justify-between font-semibold mb-4">
               <span>Total:</span>
-              <span>Tk {calculateSubtotal()}</span>
+              <span>Tk {calculateSubtotal() + 100}</span>
             </div>
 
             <div className="mb-4">
@@ -144,23 +225,6 @@ function Checkout() {
                 <label>Cash on delivery</label>
               </div>
             </div>
-
-            <div className="flex mb-4">
-              <input
-                type="text"
-                placeholder="Coupon Code"
-                className="border border-gray-300 rounded-l p-2 w-full"
-              />
-              <button className="bg-red-500 text-white px-4 rounded-r">
-                Apply Coupon
-              </button>
-            </div>
-            <button
-              onClick={handleInvoice}
-              className="w-full hover:bg-green-600 bg-red-500 text-white py-2 rounded"
-            >
-              Place Order
-            </button>
           </div>
         </div>
       </div>

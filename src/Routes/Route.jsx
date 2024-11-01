@@ -11,6 +11,7 @@ import Profile from "../Components/User/Profile/Profile";
 import Sidebar from "../Components/User/Sidebar/Sidebar";
 import InvoiceGenerator from "../Components/InvoiceGenerator/InvoiceGenerator";
 import OrderList from "../Components/OrderListTable/OrderListTable";
+import ThankYou from "../Components/ThankYou/ThankYou";
 
 const router = createBrowserRouter([
   {
@@ -49,6 +50,10 @@ const router = createBrowserRouter([
       {
         path: "invoice",
         element: <InvoiceGenerator />, 
+      },
+      {
+        path: "thankyou",
+        element: <ThankYou />, 
       },
 
       //this is Category Rotes

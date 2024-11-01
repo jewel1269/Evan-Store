@@ -10,12 +10,12 @@ function Cart() {
   const items = useSelector((state) => state.product.products);
   const dispatch = useDispatch();
   const [deliveryFee, setDeliveryFee] = useState(100);
-  const [loading, setLoading] = useState(false); // Add loading state
+  const [loading, setLoading] = useState(false); 
   const navigate = useNavigate();
 
   const handlePayment = (e) => {
     e.preventDefault();
-    setLoading(true); // Start loading spinner
+    setLoading(true); 
 
     // Simulate async action or call payment API
     setTimeout(() => {
@@ -26,9 +26,10 @@ function Cart() {
 
   const calculateSubtotal = () =>
     items.reduce(
-      (sum, item) => sum + deliveryFee + item.price?.new * item.quantity,
+      (sum, item) => sum  + item.price?.new * item.quantity,
       0
     );
+
 
   const handleQuantityChange = (id, amount) => {
     dispatch(updateQuantity({ id, amount }));
@@ -154,7 +155,7 @@ function Cart() {
             </div>
             <div className="flex justify-between font-semibold">
               <span>Total:</span>
-              <span>Tk {calculateSubtotal()}</span>
+              <span>Tk {calculateSubtotal() + 100}</span>
             </div>
 
             <button
