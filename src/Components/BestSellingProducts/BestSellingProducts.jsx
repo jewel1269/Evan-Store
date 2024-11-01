@@ -3,10 +3,14 @@ import React, { useEffect, useState } from "react";
 import Marquee from "react-fast-marquee";
 import { FaHeart, FaEye } from "react-icons/fa";
 import { NavLink } from "react-router-dom"; // Import NavLink
+import { addWishlist } from "../../Redux/features/product";
+import { useDispatch } from "react-redux";
+import toast from "react-hot-toast";
 
 const BestSellingProducts = () => {
   const [products, setProducts] = useState([]); // Initialize as an array
   const [loading, setLoading] = useState(true);
+  const dispatch = useDispatch()
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -25,8 +29,14 @@ const BestSellingProducts = () => {
     fetchProducts();
   }, []);
 
+  const handleAddWishlist = (product) => {
+    dispatch(addWishlist(product));
+    toast.success(`${product.productName} added to wishlist!`); 
+  };
+
+
   if (loading) {
-    return <div>Loading...</div>; // Display loading state
+    return <div>Loading...</div>; 
   }
 
   return (
@@ -56,7 +66,7 @@ const BestSellingProducts = () => {
             >
               {/* Action Buttons */}
               <div className="absolute top-2 right-2 flex flex-col space-y-2 text-gray-500">
-                <button className="p-1 rounded-full hover:bg-gray-200">
+                <button onClick={()=>handleAddWishlist(product)} className="p-1 rounded-full hover:bg-gray-200">
                   <FaHeart className="h-5 w-5" />
                 </button>
                 <button className="p-1 rounded-full hover:bg-gray-200">
@@ -99,7 +109,7 @@ const BestSellingProducts = () => {
                   <span key={i}>★</span>
                 ))}
                 {product.rating % 1 !== 0 && <span>☆</span>}
-                <span className="text-gray-400">({product.reviews})</span>
+                <span className="text-gray-400">({product.review})</span>
               </div>
             </div>
           ))}

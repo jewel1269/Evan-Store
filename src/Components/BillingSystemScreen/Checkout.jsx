@@ -1,27 +1,32 @@
 import React, { useState } from "react";
+import { useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 
 function Checkout() {
-  const [items] = useState([
-    { id: 1, name: "LCD Monitor", price: 650 },
-    { id: 2, name: "H1 Gamepad", price: 1100 },
-  ]);
-  const [selectedPayment, setSelectedPayment] = useState("Cash on delivery");
-  const navigate = useNavigate()
+  const items = useSelector((state) => state.product.products);
 
-  const handleInvoice =()=>{
-    navigate("/invoice")
-  }
+  const [selectedPayment, setSelectedPayment] = useState("Cash on delivery");
+  const navigate = useNavigate();
+
+  const handleInvoice = () => {
+    navigate("/invoice");
+  };
 
   const calculateSubtotal = () =>
-    items.reduce((sum, item) => sum + item.price, 0);
+    items.reduce((sum, item) => sum  + item.price.new, 0);
 
   return (
     <div className="max-w-7xl mx-auto p-6">
       <nav className="text-gray-600 text-sm mb-4">
         <span>
-          <Link to={"/"} className="hover:text-red-600">Home</Link> / <Link to={"/cart"} className="hover:text-red-600">View Cart</Link> /{" "}
-          <span className="font-semibold text-gray-800">Checkout</span>
+          <Link to={"/"} className="hover:text-red-600">
+            Home
+          </Link>{" "}
+          /{" "}
+          <Link to={"/cart"} className="hover:text-red-600">
+            View Cart
+          </Link>{" "}
+          / <span className="font-semibold text-gray-800">Checkout</span>
         </span>
       </nav>
 
@@ -105,29 +110,28 @@ function Checkout() {
           <div className="border border-gray-200 divide-y-2 rounded-lg p-4">
             {items.map((item) => (
               <div
-                key={item.id}
+                key={item._id}
                 className="flex justify-between items-center mb-2"
               >
-                <span>{item.name}</span>
-                <span>${item.price}</span>
+                <span>{item.productName}</span>
+                <span>Tk {item.price.new}</span>
               </div>
             ))}
             <hr className="my-2" />
             <div className="flex justify-between mb-2">
               <span>Subtotal:</span>
-              <span>${calculateSubtotal()}</span>
+              <span>Tk {calculateSubtotal()}</span>
             </div>
             <div className="flex justify-between mb-2">
               <span>Shipping:</span>
-              <span>Free</span>
+              <span>Tk 100</span>
             </div>
             <div className="flex justify-between font-semibold mb-4">
               <span>Total:</span>
-              <span>${calculateSubtotal()}</span>
+              <span>Tk {calculateSubtotal()}</span>
             </div>
 
             <div className="mb-4">
-             
               <div className="flex items-center mb-2">
                 <input
                   type="radio"
@@ -151,7 +155,10 @@ function Checkout() {
                 Apply Coupon
               </button>
             </div>
-            <button onClick={handleInvoice} className="w-full hover:bg-green-600 bg-red-500 text-white py-2 rounded">
+            <button
+              onClick={handleInvoice}
+              className="w-full hover:bg-green-600 bg-red-500 text-white py-2 rounded"
+            >
               Place Order
             </button>
           </div>

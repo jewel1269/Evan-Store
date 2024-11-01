@@ -3,11 +3,28 @@ import { AiOutlineHeart, AiOutlineEye } from "react-icons/ai";
 import { FaEye, FaHeart } from "react-icons/fa";
 import { NavLink } from "react-router-dom";
 import axios from "axios";
+import { useDispatch } from "react-redux";
+import { addToCart, addWishlist } from "../../Redux/features/product";
+import toast from "react-hot-toast";
 
 const ProductGallery = () => {
   const [selectedColors, setSelectedColors] = useState({});
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
+
+  const dispatch = useDispatch();
+
+  //add to cart
+  const AddToCart = (item) => {
+    dispatch(addToCart(item));
+    toast.success(`${item.productName} added successfully!`);
+  };
+
+  const handleAddWishlist = (item) => {
+    dispatch(addWishlist(item));
+    toast.success(`${item.productName} added to wishlist!`);
+  };
+
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -26,8 +43,6 @@ const ProductGallery = () => {
     fetchProducts();
   }, []);
 
-
-
   if (loading) {
     return <div>Loading...</div>;
   }
@@ -39,10 +54,20 @@ const ProductGallery = () => {
     }));
   };
 
+  // Map color names to Tailwind background color classes
+  const colorClassMapping = {
+    Red: "bg-red-500",
+    Blue: "bg-blue-500",
+    Green: "bg-green-500",
+    Black: "bg-black",
+    White: "bg-white",
+  };
+
   return (
     <div className="lg:px-8 py-16">
       <h2 className="text-red-500 font-semibold mb-2">
-        <span className="inline-block w-2 h-6 bg-red-500 mr-2"></span> Our Products
+        <span className="inline-block w-2 h-6 bg-red-500 mr-2"></span> Our
+        Products
       </h2>
       <h1 className="text-3xl font-bold mb-8">Explore New Arrival Products</h1>
 
@@ -74,7 +99,7 @@ const ProductGallery = () => {
                 </NavLink>
               </div>
               <div className="absolute top-2 right-2 flex flex-col space-y-2 text-gray-500">
-                <button className="p-1 rounded-full hover:bg-gray-200">
+                <button onClick={()=>handleAddWishlist(product)} className="p-1 rounded-full hover:bg-gray-200">
                   <FaHeart className="h-5 w-5" />
                 </button>
                 <button className="p-1 rounded-full hover:bg-gray-200">
@@ -83,14 +108,18 @@ const ProductGallery = () => {
               </div>
             </div>
 
-            <h2 className="mt-4 text-lg font-semibold">{product.productName}</h2>
+            <h2 className="mt-4 text-lg font-semibold">
+              {product.productName}
+            </h2>
             <p className="text-red-500 font-bold">${product.price.new}</p>
 
             <div className="flex items-center mt-2">
               <span className="text-yellow-400">
                 {"⭐".repeat(product.rating)}
               </span>
-              <span className="text-gray-400 ml-2">({product.review} review)</span>
+              <span className="text-gray-400 ml-2">
+                ({product.review} review)
+              </span>
             </div>
 
             {product.colors.length > 0 && (
@@ -98,7 +127,9 @@ const ProductGallery = () => {
                 {product.colors.map((color, index) => (
                   <span
                     key={index}
-                    className={`w-4 h-4 rounded-full cursor-pointer ${color} ${
+                    className={`w-5 h-5 rounded-full cursor-pointer ${
+                      colorClassMapping[color] || "bg-gray-400"
+                    } ${
                       selectedColors[product._id] === color
                         ? "ring-2 ring-offset-2 ring-gray-800"
                         : ""
@@ -109,11 +140,9 @@ const ProductGallery = () => {
               </div>
             )}
 
-            {product.hasAddToCart && (
-              <button className="mt-4 w-full bg-black text-white py-2 rounded hover:bg-gray-800">
-                Add To Cart
-              </button>
-            )}
+            <button onClick={()=>AddToCart(product)} className="mt-4 w-full bg-black text-white py-2 rounded hover:bg-green-600">
+              Add To Cart
+            </button>
           </div>
         ))}
       </div>

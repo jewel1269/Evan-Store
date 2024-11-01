@@ -22,16 +22,16 @@ const FlashSale = () => {
   //add to cart
   const AddToCart = (item) => {
     dispatch(addToCart(item));
-    toast.success("Product added successfully!");
+    toast.success(`${item.productName} added successfully!`);
   };
 
   const handleAddWishlist = (item) => {
     dispatch(addWishlist(item));
-    toast.success("Product added to wishlist!"); 
+    toast.success(`${item.productName} added to wishlist!`);
   };
 
   // Set the countdown end time here
-  const endTime = new Date("2024-10-31T23:59:59").getTime();
+  const endTime = new Date("2024-11-01T23:59:59").getTime();
 
   useEffect(() => {
     const interval = setInterval(() => {

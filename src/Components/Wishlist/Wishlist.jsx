@@ -71,14 +71,14 @@ const Wishlist = () => {
                     className="text-black hover:text-blue-500 transition-colors duration-200"
                     aria-label={`Add ${item.productName} to cart`}
                   >
-                    <FaShoppingCart className="inline-block" />
+                    <FaShoppingCart className="inline-block h-6 w-6 " />
                   </button>
                   <button
                     onClick={() => deleteFromWishlist(item._id)}
                     className="text-gray-500 hover:text-red-500 transition-colors duration-200"
                     aria-label={`Remove ${item.productName} from wishlist`}
                   >
-                    <FaTrash className="inline-block" />
+                    <FaTrash className="inline-block h-6 w-6" />
                   </button>
                 </td>
               </tr>

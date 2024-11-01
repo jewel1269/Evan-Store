@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { NavLink, useLocation } from "react-router-dom";
+import toast from "react-hot-toast";
+import { addToCart } from "../../Redux/features/product";
+import { useDispatch } from "react-redux";
 
 function ProductPage() {
   const [selectedColor, setSelectedColor] = useState(null);
@@ -10,6 +13,16 @@ function ProductPage() {
   const [sortOrder, setSortOrder] = useState("default");
   const [products, setProducts] = useState([]);
   const location = useLocation();
+
+  const dispatch = useDispatch();
+
+  //add to cart
+  const AddToCart = (item) => {
+    dispatch(addToCart(item));
+    toast.success(`${item.productName} added successfully!`);
+  };
+
+ 
 
   // Fetch products from the API
   useEffect(() => {
@@ -187,7 +200,12 @@ function ProductPage() {
               <div className="relative">
                 {product.NewArrival && (
                   <span className="absolute top-2 left-2 bg-blue-500 text-white text-xs px-2 py-1 rounded">
-                    New Arrival
+                    New 
+                  </span>
+                )}
+                {product.bestSale && (
+                  <span className="absolute top-2 left-2 bg-red-500 text-white text-xs px-3 py-1 rounded">
+                    Best 
                   </span>
                 )}
                 <NavLink to={`/productDetails/${product._id}`}>
@@ -216,7 +234,7 @@ function ProductPage() {
                 <p className="text-xs text-red-500 mt-1">
                   {product.review} reviews
                 </p>
-                <button className="btn btn-primary hover:btn-accent btn-xs">
+                <button onClick={()=>AddToCart(product)} className="btn btn-primary hover:btn-accent btn-xs">
                   Add To Cart
                 </button>
               </div>

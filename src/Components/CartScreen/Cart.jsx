@@ -10,11 +10,18 @@ function Cart() {
   const items = useSelector((state) => state.product.products);
   const dispatch = useDispatch();
   const [deliveryFee, setDeliveryFee] = useState(100);
+  const [loading, setLoading] = useState(false); // Add loading state
   const navigate = useNavigate();
 
   const handlePayment = (e) => {
     e.preventDefault();
-    navigate("/bilingSystem");
+    setLoading(true); // Start loading spinner
+
+    // Simulate async action or call payment API
+    setTimeout(() => {
+      setLoading(false); // Stop loading spinner
+      navigate("/bilingSystem"); // Navigate after process completes
+    }, 2000); // Mock async delay
   };
 
   const calculateSubtotal = () =>
@@ -24,14 +31,13 @@ function Cart() {
     );
 
   const handleQuantityChange = (id, amount) => {
-    // Dispatch action to update quantity
     dispatch(updateQuantity({ id, amount }));
-    toast.success("product add successfully!");
+    toast.success("Product quantity updated successfully!");
   };
 
   const removeItem = (item) => {
     dispatch(removeToCart(item._id));
-    toast.success(`${item.productName} delete successfully!`);
+    toast.success(`${item.productName} removed successfully!`);
   };
 
   return (
@@ -66,7 +72,6 @@ function Cart() {
                   <tr key={item._id} className="border-t">
                     <td className="py-3 flex items-center">
                       <NavLink to={`/productDetails/${item?._id}`}>
-                        {/* Product Image */}
                         <div className="flex justify-center mb-4">
                           <img
                             src={
@@ -154,9 +159,33 @@ function Cart() {
 
             <button
               onClick={handlePayment}
-              className="mt-4 w-full hover:bg-green-600 bg-red-500 text-white py-2 rounded"
+              className="mt-4 w-full hover:bg-green-600 bg-red-500 text-white py-2 rounded flex justify-center items-center"
+              disabled={loading} // Disable button when loading
             >
-              Proceed to checkout
+              {loading ? (
+                <svg
+                  className="animate-spin h-5 w-5 text-white mr-2"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                >
+                  <circle
+                    className="opacity-25"
+                    cx="12"
+                    cy="12"
+                    r="10"
+                    stroke="currentColor"
+                    strokeWidth="4"
+                  ></circle>
+                  <path
+                    className="opacity-75"
+                    fill="currentColor"
+                    d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"
+                  ></path>
+                </svg>
+              ) : (
+                "Proceed to checkout"
+              )}
             </button>
           </div>
         </div>
