@@ -12,6 +12,8 @@ import Sidebar from "../Components/User/Sidebar/Sidebar";
 import InvoiceGenerator from "../Components/InvoiceGenerator/InvoiceGenerator";
 import OrderList from "../Components/OrderListTable/OrderListTable";
 import ThankYou from "../Components/ThankYou/ThankYou";
+import LoginPage from "../Components/LoginPage/LoginPage";
+import Resister from "../Components/Register/Register";
 
 const router = createBrowserRouter([
   {
@@ -54,6 +56,16 @@ const router = createBrowserRouter([
       {
         path: "thankyou",
         element: <ThankYou />, 
+      },
+
+      //Authorization
+      {
+        path: "loginPage",
+        element: <LoginPage />, 
+      },
+      {
+        path: "resiPage",
+        element: <Resister />, 
       },
 
       //this is Category Rotes

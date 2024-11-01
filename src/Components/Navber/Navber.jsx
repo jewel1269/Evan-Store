@@ -7,6 +7,8 @@ import { NavLink } from "react-router-dom";
 const Navber = () => {
   const wishlist = useSelector((state) => state.product.wishlist);
   const products = useSelector((state) => state.product.products);
+
+  const user = false;
   return (
     <div className="navbar  bg-base-100 rounded-xl shadow-sm px-4 lg:px-16">
       <div className="flex justify-between items-center w-full">
@@ -116,14 +118,24 @@ const Navber = () => {
               tabIndex={0}
               className="menu menu-sm z-[100] dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
             >
-              <li>
+            {user === true ?
+            
+            <>
+            <li>
                 <NavLink to={"/sidebar/profile"} className="justify-between">
-                  Profile <span className="badge">New</span>
+                  Profile
                 </NavLink>
               </li>
               <li>
                 <NavLink to={"/sidebar"}>Settings</NavLink>
               </li>
+            </>
+            
+              :
+              <li>
+                <NavLink to={"/loginPage"}>Log In</NavLink>
+              </li>
+              }
               <li>
                 <a>Logout</a>
               </li>
