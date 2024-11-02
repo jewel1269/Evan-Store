@@ -10,12 +10,12 @@ function Cart() {
   const items = useSelector((state) => state.product.products);
   const dispatch = useDispatch();
   const [deliveryFee, setDeliveryFee] = useState(100);
-  const [loading, setLoading] = useState(false); 
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   const handlePayment = (e) => {
     e.preventDefault();
-    setLoading(true); 
+    setLoading(true);
 
     // Simulate async action or call payment API
     setTimeout(() => {
@@ -25,11 +25,7 @@ function Cart() {
   };
 
   const calculateSubtotal = () =>
-    items.reduce(
-      (sum, item) => sum  + item.price?.new * item.quantity,
-      0
-    );
-
+    items.reduce((sum, item) => sum + item.price?.new * item.quantity, 0);
 
   const handleQuantityChange = (id, amount) => {
     dispatch(updateQuantity({ id, amount }));
@@ -56,16 +52,16 @@ function Cart() {
 
       <div className="flex flex-col lg:flex-row gap-6 max-w-8xl">
         {/* Left Section: Cart Items Table */}
-        <div className="w-full lg:w-2/3">
-          <div className="table-container border border-gray-200 rounded-lg lg:p-4 mb-6">
+        <div className="w-full overflow-x-auto lg:w-2/3">
+          <div className="border border-gray-200 rounded-lg p-4 mb-6">
             <table className="w-full text-left">
               <thead>
                 <tr className="text-gray-600">
-                  <th>Product</th>
-                  <th>Price</th>
-                  <th>Quantity</th>
-                  <th>Subtotal</th>
-                  <th>Delete</th>
+                  <th className="py-2">Product</th>
+                  <th className="hidden lg:table-cell py-2">Price</th>
+                  <th className="py-2">Quantity</th>
+                  <th className="hidden lg:table-cell py-2">Subtotal</th>
+                  <th className="py-2">Delete</th>
                 </tr>
               </thead>
               <tbody>
@@ -73,25 +69,25 @@ function Cart() {
                   <tr key={item._id} className="border-t">
                     <td className="py-3 flex items-center">
                       <NavLink to={`/productDetails/${item?._id}`}>
-                        <div className="flex justify-center mb-4">
-                          <img
-                            src={
-                              item.image && item.image[0]
-                                ? `http://localhost:5000/${item.image[0].replace(
-                                    /\\/g,
-                                    "/"
-                                  )}`
-                                : "default-image-url.jpg"
-                            }
-                            alt="Product"
-                            className="w-16 h-16 rounded-lg"
-                          />
-                        </div>
+                        <img
+                          src={
+                            item.image && item.image[0]
+                              ? `http://localhost:5000/${item.image[0].replace(
+                                  /\\/g,
+                                  "/"
+                                )}`
+                              : "default-image-url.jpg"
+                          }
+                          alt="Product"
+                          className="w-16 h-16 rounded-lg"
+                        />
                       </NavLink>
-                      {item.productName}
+                      <span className="ml-2">{item.productName}</span>
                     </td>
-                    <td>Tk {item.price?.new}</td>
-                    <td className="flex lg:-mt-20 items-center">
+                    <td className="hidden lg:table-cell">
+                      Tk {item.price?.new}
+                    </td>
+                    <td className="flex mb-12 items-center">
                       <button
                         onClick={() => handleQuantityChange(item._id, -1)}
                         className="bg-gray-200 px-2 py-1 rounded-l"
@@ -107,7 +103,9 @@ function Cart() {
                         +
                       </button>
                     </td>
-                    <td>Tk {item.price?.new * item.quantity}</td>
+                    <td className="hidden lg:table-cell">
+                      Tk {item.price?.new * item.quantity}
+                    </td>
                     <td>
                       <ImCross
                         className="cursor-pointer text-red-500"
@@ -120,8 +118,8 @@ function Cart() {
             </table>
           </div>
 
-          <div className="flex justify-between items-center mb-6">
-            <button className="bg-gray-100 text-gray-700 px-4 py-2 rounded border">
+          <div className="flex flex-col lg:flex-row justify-between items-center mb-6">
+            <button className="bg-gray-100 text-gray-700 px-4 py-2 rounded border mb-2 lg:mb-0">
               Return To Shop
             </button>
             <button className="bg-gray-100 text-gray-700 px-4 py-2 rounded border">

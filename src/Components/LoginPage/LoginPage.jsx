@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import axios from "axios"; // assuming you'll use axios to send the login request
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 
 function LoginPage() {
   const [emailOrPhone, setEmailOrPhone] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate()
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -21,15 +23,18 @@ function LoginPage() {
     setLoading(true);
 
     try {
-      const response = await axios.post("/api/login", {
-        emailOrPhone,
+      const response = await axios.post("http://localhost:5000/customers/login", {
+        userEmail:emailOrPhone,
         password,
       });
 
       // Save email or phone to localStorage on successful login
-      localStorage.setItem("userEmailOrPhone", emailOrPhone);
-
-      console.log("Login successful", response.data);
+      localStorage.setItem("userEmail", emailOrPhone);
+     toast.success("Login successful")
+     setTimeout(() => {
+      window.location.reload();
+    }, 100); 
+     navigate("/")
     } catch (error) {
       // Handle error, such as incorrect password
       setError("Login failed. Please check your credentials.");
@@ -65,7 +70,7 @@ function LoginPage() {
                 placeholder="Email or Phone Number"
                 value={emailOrPhone}
                 onChange={(e) => setEmailOrPhone(e.target.value)}
-                className="w-full px-4 py-3 border-b rounded-md focus:outline-none focus:ring-2 focus:ring-red-500"
+                className="w-full px-4 py-3  border-b border-black rounded-md focus:outline-none focus:ring-2 focus:ring-red-500"
               />
             </div>
             <div>
@@ -74,7 +79,7 @@ function LoginPage() {
                 placeholder="Password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="w-full px-4 py-3 border-b rounded-md focus:outline-none focus:ring-2 focus:ring-red-500"
+                className="w-full px-4 py-3 border-b border-black rounded-md focus:outline-none focus:ring-2 focus:ring-red-500"
               />
             </div>
 

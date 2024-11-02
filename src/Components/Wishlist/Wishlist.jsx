@@ -19,6 +19,7 @@ const Wishlist = () => {
     dispatch(removeWishlist(id)); 
     toast.success(`Item removed from wishlist!`); 
   };
+  
 
   return (
     <div className="p-10">
