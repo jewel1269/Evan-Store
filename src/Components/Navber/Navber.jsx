@@ -16,7 +16,7 @@ const Navber = () => {
   useEffect(() => {
     const fetchUserData = async () => {
       const email = localStorage.getItem("userEmail");
-
+      
       if (email) {
         try {
           const response = await axios.get(

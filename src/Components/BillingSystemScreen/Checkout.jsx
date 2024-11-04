@@ -18,6 +18,7 @@ function Checkout() {
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch()
+  const userEmail = localStorage.getItem("userEmail");
 
   const calculateSubtotal = () =>
     items.reduce((sum, item) => sum + item.price.new * item.quantity, 0);
@@ -55,6 +56,7 @@ function Checkout() {
       })),
       paymentMethod: selectedPayment,
       subtotal: calculateSubtotal(),
+      userEmail,
       shipping: 100,
       total: calculateSubtotal() + 100,
     };
