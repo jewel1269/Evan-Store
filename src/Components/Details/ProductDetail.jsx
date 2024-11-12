@@ -158,8 +158,9 @@ function ProductDetail() {
             </div>
           </div>
 
-          <div className="flex items-center mb-4">
-            <div className="border-2">
+          <div className="flex flex-col sm:flex-row items-center gap-2 mb-4">
+            {/* Quantity Control */}
+            <div className="flex border-2 rounded">
               <button
                 onClick={() => handleQuantityChange(-1)}
                 className="px-3 py-1 bg-gray-200 rounded-l"
@@ -174,15 +175,19 @@ function ProductDetail() {
                 +
               </button>
             </div>
+
+            {/* Buy Now Button */}
             <button
               onClick={handleOrder}
-              className="ml-4 bg-red-500 text-white px-6 py-2 rounded"
+              className="bg-red-500 text-white px-6 py-2 rounded mt-2 sm:mt-0 sm:ml-4"
             >
               Buy Now
             </button>
+
+            {/* Add to Cart Button */}
             <button
               onClick={() => AddToCart(product)}
-              className="ml-4 bg-green-500 hover:bg-green-700 text-white px-6 py-2 rounded"
+              className="bg-green-500 hover:bg-green-700 text-white px-6 py-2 rounded mt-2 sm:mt-0 sm:ml-4"
             >
               Add to Cart
             </button>

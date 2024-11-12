@@ -14,6 +14,8 @@ import OrderList from "../Components/OrderListTable/OrderListTable";
 import ThankYou from "../Components/ThankYou/ThankYou";
 import LoginPage from "../Components/LoginPage/LoginPage";
 import Resister from "../Components/Register/Register";
+import Offer from "../Components/Offer/Offer";
+import AboutCompany from "../Components/AboutCompany/AboutCompany";
 
 const router = createBrowserRouter([
   {
@@ -40,6 +42,14 @@ const router = createBrowserRouter([
       {
         path: "bilingSystem",
         element: <BillingSystem />,
+      },
+      {
+        path: "offer",
+        element: <Offer />,
+      },
+      {
+        path: "about",
+        element: <AboutCompany />,
       },
       {
         path: "productDetails/:id",

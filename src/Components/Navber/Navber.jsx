@@ -261,6 +261,9 @@ const Navber = () => {
               <NavLink to="/contact">Contact</NavLink>
             </li>
             <li>
+              <NavLink to="/about">About</NavLink>
+            </li>
+            <li>
             <NavLink  to={"/sidebar/profile"}>Profile</NavLink>
             </li>
             <li>
