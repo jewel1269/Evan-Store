@@ -1,5 +1,5 @@
 import { createBrowserRouter } from "react-router-dom";
-import HomeScreen from './../Components/HomeScreen/HomeScreen';
+import HomeScreen from "./../Components/HomeScreen/HomeScreen";
 import Shop from "../Components/ShopPage/Shop";
 import HomePageContant from "../Components/HomePageContant/HomePageContant";
 import WishlistScreen from "../Components/Wishlist/WishlistScreen";
@@ -18,89 +18,89 @@ import Resister from "../Components/Register/Register";
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <HomeScreen />, 
+    element: <HomeScreen />,
     errorElement: <div>Error</div>,
     children: [
       {
         path: "/",
-        element: <HomePageContant />, 
+        element: <HomePageContant />,
       },
       {
         path: "shop",
-        element: <Shop />, 
+        element: <Shop />,
       },
       {
         path: "wishlist",
-        element: <WishlistScreen />, 
+        element: <WishlistScreen />,
       },
       {
         path: "cart",
-        element: <CartScreen />, 
+        element: <CartScreen />,
       },
       {
         path: "bilingSystem",
-        element: <BillingSystem />, 
+        element: <BillingSystem />,
       },
       {
         path: "productDetails/:id",
-        element: <ProductDetail />, 
+        element: <ProductDetail />,
       },
       {
         path: "contact",
-        element: <Contact />, 
+        element: <Contact />,
       },
       {
         path: "invoice",
-        element: <InvoiceGenerator />, 
+        element: <InvoiceGenerator />,
       },
       {
         path: "thankyou",
-        element: <ThankYou />, 
+        element: <ThankYou />,
       },
 
       //Authorization
       {
         path: "loginPage",
-        element: <LoginPage />, 
+        element: <LoginPage />,
       },
       {
         path: "resiPage",
-        element: <Resister />, 
+        element: <Resister />,
       },
 
       //this is Category Rotes
       {
         path: "shop/WomansFashion",
-        element: <Shop />, 
+        element: <Shop />,
       },
       {
         path: "shop/MensFashion",
-        element: <Shop />, 
+        element: <Shop />,
       },
       {
         path: "shop/Electronics",
-        element: <Shop />, 
+        element: <Shop />,
       },
       {
         path: "/shop/HomeLifestyle",
-        element: <Shop />, 
+        element: <Shop />,
       },
       {
         path: "shop/BabysToys",
-        element: <Shop />, 
+        element: <Shop />,
       },
       {
         path: "shop/HealthBeauty",
-        element: <Shop />, 
+        element: <Shop />,
       },
       {
         path: "shop/WomansFashion",
-        element: <Shop />, 
+        element: <Shop />,
       },
-  
+
       {
         path: "sidebar",
-        element: <Sidebar />, 
+        element: <Sidebar />,
         children: [
           {
             path: "profile",
@@ -108,7 +108,7 @@ const router = createBrowserRouter([
           },
           {
             path: "orderList",
-            element: <OrderList/>,
+            element: <OrderList />,
           },
         ],
       },

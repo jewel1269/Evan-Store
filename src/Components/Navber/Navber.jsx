@@ -12,6 +12,26 @@ const Navber = () => {
   const [user, setUser] = useState(null);
   const [error, setError] = useState("");
   const navigate = useNavigate();
+  const [product, setProduct]= useState([])
+
+  //here all product 
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        // Use the correct API endpoint
+        const response = await axios.get(
+          `http://localhost:5000/product/Api/byGetProduct`
+        );
+        setProduct(response.data);
+      } catch (error) {
+        console.error("Error fetching products:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchProducts();
+  }, []);
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -46,7 +66,7 @@ const Navber = () => {
   };
 
   return (
-    <div className="navbar  bg-base-100 rounded-xl shadow-sm px-4 lg:px-16">
+    <div className="  bg-base-100 rounded-xl shadow-sm px-4 lg:px-16">
       <div className="flex justify-between items-center w-full">
         {/* Logo */}
         <div className=" flex-none">
@@ -127,7 +147,7 @@ const Navber = () => {
           </div>
 
           {/* Search Bar */}
-          <div className="form-control h-8  lg:w-80 w-20 mx-4 lg:mx-0">
+          <div className="form-control h-8  lg:w-80 w-auto  md:w-auto mx-4 lg:mx-0">
             <input
               type="text"
               placeholder="Search"
@@ -241,13 +261,13 @@ const Navber = () => {
               <NavLink to="/contact">Contact</NavLink>
             </li>
             <li>
-              <a>Profile</a>
+            <NavLink  to={"/sidebar/profile"}>Profile</NavLink>
             </li>
             <li>
-              <a>Settings</a>
+            <NavLink  to={"/sidebar"}>Settings</NavLink>
             </li>
             <li>
-              <a>Logout</a>
+              <a onClick={handleLogOut}>Logout</a>
             </li>
           </ul>
         </div>

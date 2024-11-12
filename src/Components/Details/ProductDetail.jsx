@@ -40,21 +40,18 @@ function ProductDetail() {
 
   const handleOrder = (e) => {
     e.preventDefault();
-    navigate("/billingSystem");
+    navigate("/bilingSystem");
   };
 
   const handleQuantityChange = (increment) => {
     setQuantity((prev) => Math.max(1, prev + increment));
   };
 
-
-
   //add to cart
   const AddToCart = (product) => {
     dispatch(addToCart(product));
     toast.success(`${product.productName} added successfully!`);
   };
-
 
   if (loading) {
     return <p>Loading...</p>;
@@ -184,7 +181,7 @@ function ProductDetail() {
               Buy Now
             </button>
             <button
-              onClick={()=>AddToCart(product)}
+              onClick={() => AddToCart(product)}
               className="ml-4 bg-green-500 hover:bg-green-700 text-white px-6 py-2 rounded"
             >
               Add to Cart
