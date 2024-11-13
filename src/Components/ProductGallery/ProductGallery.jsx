@@ -30,7 +30,7 @@ const ProductGallery = () => {
     const fetchProducts = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:5000/product/Api/GetProducts?NewArrival=true`
+          `https://evan-store-server.vercel.app/product/Api/GetProducts?NewArrival=true`
         );
         setProducts(response.data);
       } catch (error) {
@@ -88,7 +88,7 @@ const ProductGallery = () => {
                 <NavLink to={`/productDetails/${product._id}`}>
                   <div className="flex justify-center mb-4">
                     <img
-                      src={`http://localhost:5000/${product.image[0].replace(
+                      src={`https://evan-store-server.vercel.app/${product.image[0].replace(
                         /\\/g,
                         "/"
                       )}`} // Display only the first image

@@ -68,7 +68,7 @@ function Cart() {
                     <td className="py-3 lg:flex items-center">
                       <NavLink to={`/productDetails/${item?._id}`}>
                         <img
-                          src={`http://localhost:5000/${item.image[0]?.replace(
+                          src={`https://evan-store-server.vercel.app/${item.image[0]?.replace(
                             /\\/g,
                             "/"
                           )}`}

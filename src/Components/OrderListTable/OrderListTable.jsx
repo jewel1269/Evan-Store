@@ -37,7 +37,7 @@ const OrderListTable = ({ orders }) => {
                     <img
                       src={
                         item.image && item.image[0]
-                          ? `http://localhost:5000/${item.image[0].replace(
+                          ? `https://evan-store-server.vercel.app/${item.image[0].replace(
                               /\\/g,
                               "/"
                             )}`
@@ -97,7 +97,7 @@ export default function OrderList() {
   const fetchOrder = async (email) => {
     try {
       const response = await axios.get(
-        `http://localhost:5000/order/api/singleOrder`,
+        `https://evan-store-server.vercel.app/order/api/singleOrder`,
         { params: { email } }
       );
       setOrders(response.data);

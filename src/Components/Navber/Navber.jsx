@@ -20,7 +20,7 @@ const Navber = () => {
       try {
         // Use the correct API endpoint
         const response = await axios.get(
-          `http://localhost:5000/product/Api/byGetProduct`
+          `https://evan-store-server.vercel.app/product/Api/byGetProduct`
         );
         setProduct(response.data);
       } catch (error) {
@@ -40,7 +40,7 @@ const Navber = () => {
       if (email) {
         try {
           const response = await axios.get(
-            "http://localhost:5000/customers/user",
+            "https://evan-store-server.vercel.app/customers/user",
             {
               params: { userEmail: email },
             }

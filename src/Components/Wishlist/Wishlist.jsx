@@ -53,7 +53,7 @@ const Wishlist = () => {
                     <td className="py-4 px-4 border-b">
                       <NavLink to={`/productDetails/${item._id}`}>
                         <img
-                          src={`http://localhost:5000/${item.image[0].replace(
+                          src={`https://evan-store-server.vercel.app/${item.image[0].replace(
                             /\\/g,
                             "/"
                           )}`}
@@ -114,7 +114,7 @@ const Wishlist = () => {
                   className="w-full flex justify-center mb-2"
                 >
                   <img
-                    src={`http://localhost:5000/${item.image[0].replace(
+                    src={`https://evan-store-server.vercel.app/${item.image[0].replace(
                       /\\/g,
                       "/"
                     )}`}

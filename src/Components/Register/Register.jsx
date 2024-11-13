@@ -31,7 +31,7 @@ const Register = () => {
     setLoading(true);
 
     try {
-      const response = await axios.post("http://localhost:5000/customers/create", {
+      const response = await axios.post("https://evan-store-server.vercel.app/customers/create", {
         name,
         userEmail:emailOrPhone,
         password,

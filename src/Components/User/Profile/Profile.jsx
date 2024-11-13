@@ -14,7 +14,7 @@ const Profile = () => {
       if (email) {
         try {
           const response = await axios.get(
-            "http://localhost:5000/customers/user",
+            "https://evan-store-server.vercel.app/customers/user",
             {
               params: { userEmail: email },
             }

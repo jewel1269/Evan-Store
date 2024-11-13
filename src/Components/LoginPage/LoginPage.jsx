@@ -23,7 +23,7 @@ function LoginPage() {
     setLoading(true);
 
     try {
-      const response = await axios.post("http://localhost:5000/customers/login", {
+      const response = await axios.post("https://evan-store-server.vercel.app/customers/login", {
         userEmail:emailOrPhone,
         password,
       });

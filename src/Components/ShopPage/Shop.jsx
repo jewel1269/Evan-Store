@@ -29,7 +29,7 @@ function ProductPage() {
     const fetchProducts = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:5000/product/Api/byGetProduct"
+          "https://evan-store-server.vercel.app/product/Api/byGetProduct"
         );
         setProducts(response.data);
       } catch (error) {
@@ -211,7 +211,7 @@ function ProductPage() {
                 <NavLink to={`/productDetails/${product._id}`}>
                   <div className="flex justify-center mb-4">
                     <img
-                      src={`http://localhost:5000/${product.image[0].replace(
+                      src={`https://evan-store-server.vercel.app/${product.image[0].replace(
                         /\\/g,
                         "/"
                       )}`}

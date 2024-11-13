@@ -24,10 +24,10 @@ function ProductDetail() {
     const fetchProduct = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:5000/product/Api/byGetProduct/${id}`
+          `https://evan-store-server.vercel.app/product/Api/byGetProduct/${id}`
         );
         setProduct(response.data);
-        setMainImage(`http://localhost:5000/${response.data.image[0]}`);
+        setMainImage(`https://evan-store-server.vercel.app/${response.data.image[0]}`);
       } catch (error) {
         console.error("Error fetching product:", error);
       } finally {
@@ -82,10 +82,10 @@ function ProductDetail() {
             {product.image.map((img, index) => (
               <img
                 key={index}
-                src={`http://localhost:5000/${img}`}
+                src={`https://evan-store-server.vercel.app/${img}`}
                 alt={`Product view ${index + 1}`}
                 className="w-24 h-24 border border-gray-200 cursor-pointer"
-                onClick={() => setMainImage(`http://localhost:5000/${img}`)}
+                onClick={() => setMainImage(`https://evan-store-server.vercel.app/${img}`)}
               />
             ))}
           </div>

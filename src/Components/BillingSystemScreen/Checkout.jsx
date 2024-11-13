@@ -62,7 +62,7 @@ function Checkout() {
     };
 
     try {
-      await axios.post("http://localhost:5000/order/api/orders", orderData);
+      await axios.post("https://evan-store-server.vercel.app/order/api/orders", orderData);
       toast.success("Order Successfully Complete");
       navigate("/thankyou");
       removeItem(items)

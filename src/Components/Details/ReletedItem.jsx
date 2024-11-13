@@ -13,7 +13,7 @@ const RelatedItem = ({ category }) => {
     const fetchProduct = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:5000/product/byCategoryClient?category=${category}`
+          `https://evan-store-server.vercel.app/product/byCategoryClient?category=${category}`
         );
         setProducts(response.data);
       } catch (error) {
@@ -59,7 +59,7 @@ const RelatedItem = ({ category }) => {
               <NavLink to={`/productDetails/${item._id}`}>
                 <div className="flex justify-center mb-4">
                   <img
-                    src={`http://localhost:5000/${item.image[0].replace(/\\/g, "/")}`}
+                    src={`https://evan-store-server.vercel.app/${item.image[0].replace(/\\/g, "/")}`}
                     alt="Product"
                     className="w-60 h-48 rounded-lg"
                   />

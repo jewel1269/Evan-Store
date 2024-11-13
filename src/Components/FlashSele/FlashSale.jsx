@@ -31,7 +31,7 @@ const FlashSale = () => {
   };
 
   // Set the countdown end time here
-  const endTime = new Date("2024-11-01T23:59:59").getTime();
+  const endTime = new Date("2024-11-14T23:59:59").getTime();
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -60,7 +60,7 @@ const FlashSale = () => {
       try {
         // Use the correct API endpoint
         const response = await axios.get(
-          `http://localhost:5000/product/Api/byGetProduct`
+          `https://evan-store-server.vercel.app/product/Api/byGetProduct`
         );
         setFlashSales(response.data);
       } catch (error) {
@@ -143,7 +143,7 @@ const FlashSale = () => {
               {/* Product Image */}
               <div className="flex justify-center mb-4">
                 <img
-                  src={`http://localhost:5000/${item.image[0].replace(
+                  src={`https://evan-store-server.vercel.app/${item.image[0].replace(
                     /\\/g,
                     "/"
                   )}`} // Display only the first image
